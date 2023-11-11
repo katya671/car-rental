@@ -1,0 +1,87 @@
+.item {
+  max-width: 274px;
+}
+
+.imageWrap {
+  position: relative;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  width: 274px;
+  height: 268px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.heartBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  color: transparent;
+  transition: color var(--tra);
+}
+
+.checked {
+  color: var(--blue);
+}
+
+.icon {
+  stroke: var(--white);
+  fill: currentColor;
+}
+
+.checked .icon {
+  stroke: currentColor;
+}
+
+.titleWrap {
+  color: var(--dark);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-right: 9px;
+}
+
+.title span {
+  color: var(--blue);
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--dark);
+  opacity: 0.5;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 28px;
+
+  *:not(:last-child)::after {
+    content: "|";
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  *:nth-child(3)::after {
+    content: "";
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+  .break:after {
+    content: "";
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,12 @@
+.button {
+  padding: 12px 0;
+  width: 100%;
+  border-radius: 12px;
+  background-color: var(--blue);
+  color: var(--white);
+  transition: background-color var(--tra);
+  &:hover,
+  &:focus {
+    background-color: var(--dark-blue);
+  }
+}

@@ -1,0 +1,152 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark);
+  opacity: 0.5;
+  transition: opacity var(--tra);
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: 24px;
+  z-index: 20;
+  width: calc(100% - 40px);
+  max-width: 541px;
+  max-height: 90%;
+}
+
+.content {
+  overflow-y: auto;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark);
+  transition: color var(--tra);
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  color: var(--blue);
+}
+
+.closeIcon {
+  stroke: currentColor;
+}
+
+.image {
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.btnContainer {
+  max-width: 168px;
+}
+
+.title {
+  color: var(--dark);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.title span {
+  color: var(--blue);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--dark);
+  opacity: 0.5;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  row-gap: 4px;
+
+  *:not(:last-child)::after {
+    content: "|";
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+  .break:after {
+    content: "";
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.info {
+  *:nth-child(5)::after {
+    content: "";
+    margin-left: 0;
+  }
+}
+
+.details {
+  *:nth-child(3)::after {
+    content: "";
+    margin-left: 0;
+  }
+}
+
+.descr {
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.conditions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  font-family: "Montserrat";
+  font-size: 12px;
+}
+
+.condition {
+  padding: 7px 14px;
+  border-radius: 35px;
+  background: var(--light);
+}
+
+.condition span {
+  color: var(--blue);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.24px;
+}

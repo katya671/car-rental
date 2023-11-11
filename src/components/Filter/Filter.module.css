@@ -1,0 +1,73 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 50px;
+}
+
+.btnContainer {
+  width: 136px;
+}
+
+label {
+  color: var(--grey);
+  font-weight: 500;
+  line-height: 1.28;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.input {
+  padding-top: 14px 24px;
+  max-width: 160px;
+  height: 48px;
+  border: none;
+  outline: none;
+  background-color: var(--light);
+  color: var(--dark);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+}
+
+.inputWrap {
+  position: relative;
+  &:first-child {
+    .input {
+      border-radius: 14px 0 0 14px;
+      padding-left: 77px;
+    }
+
+    &:before {
+      content: "From";
+      position: absolute;
+      top: 14px;
+      left: 24px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.11;
+    }
+  }
+
+  &:last-child {
+    .input {
+      border-radius: 0 14px 14px 0;
+      padding-left: 52px;
+    }
+
+    &:before {
+      content: "To";
+      position: absolute;
+      top: 14px;
+      left: 24px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.11;
+    }
+  }
+}

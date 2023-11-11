@@ -1,0 +1,30 @@
+.header {
+  background-color: var(--light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--blue);
+  font-size: 18px;
+  margin-right: 20px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  transition: color var(--tra);
+}
+
+.navLink:hover {
+  color: var(--dark-blue);
+}
+
+.active {
+  color: var(--dark-blue);
+}
