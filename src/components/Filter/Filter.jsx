@@ -3,38 +3,22 @@ import Select from "react-select";
 import css from "./Filter.module.css";
 import Button from "../Button/Button";
 
-const brandOptions = [
-  { value: "buick", label: "buick" },
-  { value: "volvo", label: "volvo" },
-  { value: "hummer", label: "hummer" },
-  { value: "subaru", label: "subaru" },
-  { value: "mitsubishi", label: "mitsubishi" },
-  { value: "nissan", label: "nissan" },
-  { value: "lincoln", label: "lincoln" },
-  { value: "gmc", label: "gmc" },
-  { value: "hyundai", label: "hyundai" },
-  { value: "buick2", label: "buick2" },
-  { value: "volvo2", label: "volvo2" },
-  { value: "hummer2", label: "hummer2" },
-  { value: "subaru2", label: "subaru2" },
-  { value: "mitsubishi2", label: "mitsubishi2" },
-  { value: "nissan2", label: "nissan2" },
-  { value: "lincoln2", label: "lincoln2" },
-  { value: "gmc2", label: "gmc2" },
-  { value: "hyundai2", label: "hyundai2" },
+import makes from "../../data/makes.json";
+import { setFilters } from "../../redux/advertsSlice";
+import { useDispatch } from "react-redux";
+
+const options = [
+  { value: "", label: "Any" },
+  ...makes.map((make) => ({
+    value: make.toLowerCase(),
+    label: make,
+  })),
 ];
 
-const priceOptions = [
-  { value: "30", label: "30" },
-  { value: "40", label: "40" },
-  { value: "50", label: "50" },
-  { value: "60", label: "60" },
-  { value: "70", label: "70" },
-  { value: "80", label: "80" },
-  { value: "90", label: "90" },
-  { value: "100", label: "100" },
-  { value: "110", label: "110" },
-];
+const priceOptions = [];
+for (let i = 30; i <= 150; i += 10) {
+  priceOptions.push({ value: i.toString(), label: i.toString() });
+}
 
 const styles = {
   // control: (baseStyles, state) => ({
@@ -129,12 +113,19 @@ const styles = {
   }),
 };
 
-const Filter = () => {
+const Filter = ({ onSearch }) => {
   const [carBrand, setCarBrand] = useState("");
-  const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const filters = { carBrand, priceTo, mileageFrom, mileageTo };
+    console.log(filters);
+    dispatch(setFilters(filters));
+  };
 
   return (
     <form className={css.form}>
@@ -145,8 +136,9 @@ const Filter = () => {
           placeholder="Enter the text"
           isSearchable={true}
           name="brand"
-          options={brandOptions}
+          options={options}
           styles={styles}
+          onChange={(selectedOption) => setCarBrand(selectedOption.value)}
         />
       </div>
 
@@ -159,6 +151,7 @@ const Filter = () => {
           name="price"
           options={priceOptions}
           styles={styles}
+          onChange={(selectedOption) => setPriceTo(selectedOption.value)}
         />
       </div>
 
@@ -184,7 +177,9 @@ const Filter = () => {
         </div>
       </div>
       <div className={css.btnContainer}>
-        <Button padding={"14px"}>Search</Button>
+        <Button type="submit" padding={"14px"} onClick={handleClick}>
+          Search
+        </Button>
       </div>
     </form>
   );

@@ -50,6 +50,13 @@
   padding-right: 9px;
 }
 
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 210px;
+}
+
 .title span {
   color: var(--blue);
 }
@@ -62,6 +69,8 @@
   font-size: 12px;
   line-height: 1.5;
   margin-bottom: 28px;
+  height: 40px;
+  overflow: hidden;
 
   *:not(:last-child)::after {
     content: "|";

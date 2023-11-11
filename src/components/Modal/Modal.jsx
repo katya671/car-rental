@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./Modal.module.css";
 import Button from "../Button/Button";
 import sprite from "../../images/sprite.svg";
 
-const Modal = ({ car, onClose, onRentalClick, isOpen }) => {
+const Modal = ({ car, onClose }) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const onRentalClick = () => {
+    window.location.href = "tel:+380730000000";
+  };
+
   return (
     <>
       <div className={css.backdrop} onClick={onClose}></div>
@@ -59,7 +76,8 @@ const Modal = ({ car, onClose, onRentalClick, isOpen }) => {
               {car.rentalConditions.split("\n")[2]}
             </li>
             <li className={css.condition}>
-              Mileage: <span>{car.mileage}</span>
+              Mileage:{" "}
+              <span>{Number(car.mileage).toLocaleString("en-US")}</span>
             </li>
             <li className={css.condition}>
               Price: <span>{car.rentalPrice}</span>

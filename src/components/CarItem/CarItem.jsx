@@ -3,10 +3,12 @@ import css from "./CarItem.module.css";
 import Button from "./../Button/Button";
 import Modal from "./../Modal/Modal";
 import sprite from "../../images/sprite.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../../redux/favoritesSlice";
+import { selectFavorites } from "../../redux/selectors";
 
 const CarItem = ({ car }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isHeartChecked, setHeartChecked] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -15,8 +17,18 @@ const CarItem = ({ car }) => {
     setModalOpen(false);
   };
 
+  const dispatch = useDispatch();
+
+  const favorites = useSelector(selectFavorites);
+
+  const isChecked = favorites.favorites.some(({ id }) => id === car.id);
+
   const handleHeartClick = () => {
-    setHeartChecked(!isHeartChecked);
+    if (isChecked) {
+      dispatch(removeFavorite(car));
+    } else {
+      dispatch(addFavorite(car));
+    }
   };
 
   return (
@@ -32,7 +44,7 @@ const CarItem = ({ car }) => {
             className={css.image}
           />
           <button
-            className={`${css.heartBtn} ${isHeartChecked ? css.checked : ""}`}
+            className={`${css.heartBtn} ${isChecked ? css.checked : ""}`}
             onClick={handleHeartClick}
           >
             <svg width="18" height="18" className={css.icon}>
@@ -58,9 +70,7 @@ const CarItem = ({ car }) => {
         </ul>
         <Button onClick={openModal}>Learn more</Button>
       </li>
-      {isModalOpen && (
-        <Modal car={car} onClose={closeModal} isOpen={isModalOpen} />
-      )}
+      {isModalOpen && <Modal car={car} onClose={closeModal} />}
     </>
   );
 };

@@ -8,15 +8,14 @@
   opacity: 0.5;
   transition: opacity var(--tra);
   z-index: 10;
-  overflow-y: auto;
 }
 
 .modal {
   position: fixed;
   display: flex;
-  top: 50%;
+  top: 5dvh;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background-color: var(--white);
   padding: 40px;
   border-radius: 24px;
