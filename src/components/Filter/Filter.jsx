@@ -16,7 +16,7 @@ const options = [
 ];
 
 const priceOptions = [];
-for (let i = 30; i <= 150; i += 10) {
+for (let i = 30; i <= 500; i += 10) {
   priceOptions.push({ value: i.toString(), label: i.toString() });
 }
 
@@ -113,7 +113,7 @@ const styles = {
   }),
 };
 
-const Filter = ({ onSearch }) => {
+const Filter = () => {
   const [carBrand, setCarBrand] = useState("");
   const [priceTo, setPriceTo] = useState("");
   const [mileageFrom, setMileageFrom] = useState("");
@@ -123,7 +123,6 @@ const Filter = ({ onSearch }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const filters = { carBrand, priceTo, mileageFrom, mileageTo };
-    console.log(filters);
     dispatch(setFilters(filters));
   };
 

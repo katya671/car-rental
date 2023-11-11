@@ -21,7 +21,10 @@ const advertsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAdverts.fulfilled, (state, action) => {
-      state.adverts = action.payload;
+      state.adverts =
+        action.payload.page === 1
+          ? [...action.payload.newAdverts]
+          : [...state.adverts, ...action.payload.newAdverts];
     });
   },
 });

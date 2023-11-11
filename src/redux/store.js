@@ -1,7 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import advertReducer from "./advertsSlice";
 import favoritesReducer from "./favoritesSlice";
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const favoritesPersistConfig = {
@@ -15,6 +24,12 @@ export const store = configureStore({
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
     advert: advertReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

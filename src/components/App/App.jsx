@@ -11,11 +11,11 @@ const FavoritesPage = lazy(() =>
 );
 
 const App = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAdverts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAdverts());
+  // }, [dispatch]);
 
   return (
     <Routes>

@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CarItem from "./../CarItem/CarItem";
 import css from "./CarList.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectVisibleAdverts } from "../../redux/selectors";
-import { fetchAdverts } from "../../redux/operations";
 
 const CarList = ({ data }) => {
   return (

@@ -55,12 +55,12 @@ const Modal = ({ car, onClose }) => {
           <p className={css.descr}>{car.description}</p>
           <h3 className={css.subtitle}>Accessories and functionalities:</h3>
           <ul className={`${css.list} ${css.details}`}>
-            {car.accessories.map((acc) => (
-              <li>{acc}</li>
+            {car.accessories.map((accessory, index) => (
+              <li key={index}>{accessory}</li>
             ))}
             <li className={css.break}></li>
-            {car.functionalities.map((func) => (
-              <li>{func}</li>
+            {car.functionalities.map((functionality, index) => (
+              <li key={index}>{functionality}</li>
             ))}
           </ul>
           <h3 className={css.subtitle}>Rental Conditions:</h3>
