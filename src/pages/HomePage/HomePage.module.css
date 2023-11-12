@@ -36,12 +36,21 @@
   max-width: 500px;
 }
 
-h1 {
+.home h1 {
   font-size: 54px;
   font-weight: 700;
   margin-bottom: 20px;
+  opacity: 0;
+  animation: slideBottom 1s ease forwards;
 }
-span {
+
+.home p {
+  opacity: 0;
+  animation: slideLeft 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.home span {
   color: var(--blue);
 }
 
@@ -56,6 +65,9 @@ span {
 .image {
   width: 100%;
   object-fit: cover;
+  opacity: 0;
+  animation: zoomOut 1s ease forwards;
+  animation-delay: 0.3s;
 }
 
 .link {
@@ -63,6 +75,9 @@ span {
   display: block;
   margin-top: 40px;
   margin-bottom: 40px;
+  opacity: 0;
+  animation: slideTop 1s ease forwards;
+  animation-delay: 0.6s;
 }
 
 @media screen and (max-width: 480px) {
@@ -73,5 +88,53 @@ span {
     flex-wrap: wrap;
     justify-content: center;
     height: 100%;
+  }
+}
+
+@keyframes slideBottom {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideTop {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
