@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
-  align-items: end;
+  align-items: flex-end;
   margin-bottom: 50px;
 }
 
