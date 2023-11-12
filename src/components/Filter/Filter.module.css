@@ -11,7 +11,7 @@
 }
 
 label {
-  color: var(--grey);
+  color: var(--secondary-text);
   font-weight: 500;
   line-height: 1.28;
   margin-bottom: 8px;

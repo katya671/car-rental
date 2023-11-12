@@ -1,5 +1,5 @@
 @import-normalize;
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
 
 :root {
   --white: #ffffff;
@@ -8,7 +8,6 @@
   --blue: #3470ff;
   --dark-blue: #0b44cd;
   --light: #f7f7fb;
-  --grey: #8a8a89;
   --tra: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -24,7 +23,7 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   line-height: 1.4;
   color: var(--dark);
@@ -59,4 +58,13 @@ button {
   font: inherit;
   padding: 0;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(18, 20, 23, 0.05);
 }
