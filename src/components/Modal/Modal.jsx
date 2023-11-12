@@ -29,11 +29,14 @@ const Modal = ({ car, onClose }) => {
           </button>
           <img
             loading="lazy"
-            src={car.img}
+            src={car.img || "https://source.unsplash.com/s3mTM-faobU/800x600"}
             alt={car.make}
             width={461}
             height={248}
             className={css.image}
+            onError={(e) => {
+              e.target.src = "https://source.unsplash.com/s3mTM-faobU/800x600";
+            }}
           />
           <h2 className={css.title}>
             {car.make} <span>{car.model}</span>, {car.year}

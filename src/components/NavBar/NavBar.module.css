@@ -13,18 +13,17 @@
 
 .navLink {
   text-decoration: none;
-  color: var(--blue);
+  color: var(--dark);
   font-size: 18px;
-  margin-right: 20px;
-  font-family: "Montserrat";
   font-weight: 600;
   transition: color var(--tra);
+  margin: 0 20px;
 }
 
 .navLink:hover {
-  color: var(--dark-blue);
+  color: var(--blue);
 }
 
 .active {
-  color: var(--dark-blue);
+  color: var(--blue);
 }

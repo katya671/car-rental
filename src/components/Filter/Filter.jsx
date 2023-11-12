@@ -18,30 +18,6 @@ for (let i = 30; i <= 500; i += 10) {
 }
 
 const styles = {
-  // control: (baseStyles, state) => ({
-  //   ...baseStyles,
-  //   backgroundColor: "#f7f7fb",
-  //   borderRadius: "14px",
-  //   padding: "14px 18px",
-  //   border: "none",
-  //   minWidth: "224px",
-  //   height: "48px",
-  //   display: "flex",
-  // }),
-  // menu: (baseStyles, state) => ({
-  //   ...baseStyles,
-  //   marginTop: "4px",
-  //   padding: "14px 8px 14px 18px",
-  //   borderRadius: "14px",
-  //   border: "1px solid rgba(18, 20, 23, 0.05)",
-  //   background: "#ffffff",
-  //   boxShadow: "0px 4px 36px 0px rgba(0, 0, 0, 0.02)",
-  // }),
-  // menuList: (baseStyles, state) => ({
-  //   height: "244px",
-  //   overflow: "auto",
-  // }),
-
   control: (baseStyles, state) => ({
     ...baseStyles,
     display: "flex",

@@ -7,11 +7,9 @@ const SharedLayout = () => {
   return (
     <>
       <NavBar />
-      <div className={css.container}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
