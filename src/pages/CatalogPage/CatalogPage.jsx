@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Filter from '../../components/Filter/Filter';
 import CarList from '../../components/CarList/CarList';
 import css from './CatalogPage.module.css';
@@ -20,40 +20,38 @@ const Catalog = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const getAllAdverts = useCallback(async () => {
-    try {
-      setLoading(true);
-      const allAdvertsData = await fetchAllAdverts();
-      setAllAdverts(allAdvertsData);
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const getAdvertsByPage = useCallback(async page => {
-    try {
-      setLoading(true);
-      const loadedAdverts = await fetchAdvertsByPage(page);
-      setAdverts(prevCatalog => [...prevCatalog, ...loadedAdverts]);
-    } catch (error) {
-      toast.error('Oops! Something went wrong while loading adverts.');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   const onLoadMore = () => {
     setPage(page + 1);
   };
 
   useEffect(() => {
+    const getAllAdverts = async () => {
+      try {
+        setLoading(true);
+        const allAdvertsData = await fetchAllAdverts();
+        setAllAdverts(allAdvertsData);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    };
     getAllAdverts();
-  }, [getAllAdverts]);
+  }, []);
 
   useEffect(() => {
+    const getAdvertsByPage = async page => {
+      try {
+        setLoading(true);
+        const loadedAdverts = await fetchAdvertsByPage(page);
+        setAdverts(prevCatalog => [...prevCatalog, ...loadedAdverts]);
+      } catch (error) {
+        toast.error('Oops! Something went wrong while loading adverts.');
+      } finally {
+        setLoading(false);
+      }
+    };
     getAdvertsByPage(page);
-  }, [page, getAdvertsByPage]);
+  }, [page]);
 
   useEffect(() => {
     if (isFiltered) {
