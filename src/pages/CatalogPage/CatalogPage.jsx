@@ -2,54 +2,87 @@ import React, { useEffect, useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import CarList from "../../components/CarList/CarList";
 import css from "./CatalogPage.module.css";
-import { selectFilteredAdverts } from "../../redux/selectors";
-import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
-import { fetchAdverts } from "../../redux/operations";
+import { fetchAllAdverts, fetchAdvertsByPage } from "../../api";
 
 const Catalog = () => {
-  const filteredAdverts = useSelector(selectFilteredAdverts);
-  const dispatch = useDispatch();
-  // const [adverts, setAdverts] = useState([]);
   const [page, setPage] = useState(1);
-  const [showLoadMore, setShowLoadMore] = useState();
+  const [adverts, setAdverts] = useState([]);
+  const [allAdverts, setAllAdverts] = useState([]);
+  const [filteredAdverts, setFilteredAdverts] = useState(null);
+  const [filters, setFilters] = useState({
+    carBrand: "",
+    priceTo: "",
+    mileageFrom: "",
+    mileageTo: "",
+  });
+  const [isFiltered, setIsFiltered] = useState(false);
 
-  // useEffect(() => {
-  //   setAdverts(filteredAdverts);
-  //   console.log("effect 1 setAdv");
-  //   console.log(filteredAdverts);
-  // }, [filteredAdverts]);
+  const fetchData = async () => {
+    try {
+      const loadedAdverts = await fetchAdvertsByPage(page);
+      setAdverts((prevCatalog) => [...prevCatalog, ...loadedAdverts]);
+    } catch (error) {
+      console.error("Error fetching adverts by page:", error);
+    }
 
-  // useEffect(() => {
-  //   dispatch(fetchAdverts(page));
-  //   console.log("effect 2 fetch by page");
-  //   console.log(filteredAdverts);
-  // }, [dispatch, page]);
-
-  useEffect(() => {
-    dispatch(fetchAdverts(page));
-    // return () => {
-    //   dispatch(clearAdverts());
-    //   setPage(1);
-    // };
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    setShowLoadMore(
-      filteredAdverts.length !== 0 && filteredAdverts.length % 12 === 0
-    );
-  }, [filteredAdverts]);
+    try {
+      const allAdvertsData = await fetchAllAdverts();
+      setAllAdverts(allAdvertsData);
+    } catch (error) {
+      console.error("Error fetching all adverts:", error);
+    }
+  };
 
   const onLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-    console.log("on loadmore");
+    setPage(page + 1);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [page]);
+
+  useEffect(() => {
+    if (isFiltered) {
+      const filteredAdverts = allAdverts.filter((advert) => {
+        const brandMatch =
+          !filters.carBrand ||
+          advert.make?.toLowerCase() === filters.carBrand.toLowerCase();
+        const priceMatch =
+          !filters.priceTo ||
+          (advert.rentalPrice &&
+            parseInt(advert.rentalPrice.replace("$", "")) <= filters.priceTo);
+        const mileageFromMatch =
+          !filters.mileageFrom ||
+          (advert.mileage && advert.mileage >= filters.mileageFrom);
+        const mileageToMatch =
+          !filters.mileageTo ||
+          (advert.mileage && advert.mileage <= filters.mileageTo);
+
+        return brandMatch && priceMatch && mileageFromMatch && mileageToMatch;
+      });
+      setFilteredAdverts(filteredAdverts);
+    } else {
+      setFilteredAdverts([]);
+    }
+  }, [filters, isFiltered]);
+
+  const onSearch = (filters) => {
+    setIsFiltered(true);
+    setFilters(filters);
   };
 
   return (
     <div className={css.container}>
-      <Filter />
-      <CarList data={filteredAdverts} />
-      {showLoadMore && <Button onClick={onLoadMore}>Load more</Button>}
+      <Filter onSearch={onSearch} />
+      {isFiltered ? (
+        <CarList data={filteredAdverts} />
+      ) : (
+        <CarList data={adverts} />
+      )}
+      {!isFiltered && adverts.length < allAdverts.length && (
+        <Button onClick={onLoadMore}>Load more</Button>
+      )}
     </div>
   );
 };
