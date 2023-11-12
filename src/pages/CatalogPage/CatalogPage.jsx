@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Filter from "../../components/Filter/Filter";
-import CarList from "../../components/CarList/CarList";
-import css from "./CatalogPage.module.css";
-import Button from "../../components/Button/Button";
-import { fetchAllAdverts, fetchAdvertsByPage } from "../../api";
-import Loader from "../../components/Loader/Loader";
-import { toast } from "react-hot-toast";
+import React, { useCallback, useEffect, useState } from 'react';
+import Filter from '../../components/Filter/Filter';
+import CarList from '../../components/CarList/CarList';
+import css from './CatalogPage.module.css';
+import { fetchAllAdverts, fetchAdvertsByPage } from '../../api';
+import Loader from '../../components/Loader/Loader';
+import { toast } from 'react-hot-toast';
 
 const Catalog = () => {
   const [page, setPage] = useState(1);
@@ -13,15 +12,15 @@ const Catalog = () => {
   const [allAdverts, setAllAdverts] = useState([]);
   const [filteredAdverts, setFilteredAdverts] = useState(null);
   const [filters, setFilters] = useState({
-    carBrand: "",
-    priceTo: "",
-    mileageFrom: "",
-    mileageTo: "",
+    carBrand: '',
+    priceTo: '',
+    mileageFrom: '',
+    mileageTo: '',
   });
   const [isFiltered, setIsFiltered] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const getAllAdverts = async () => {
+  const getAllAdverts = useCallback(async () => {
     try {
       setLoading(true);
       const allAdvertsData = await fetchAllAdverts();
@@ -30,19 +29,19 @@ const Catalog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const getAdvertsByPage = async () => {
+  const getAdvertsByPage = useCallback(async page => {
     try {
       setLoading(true);
       const loadedAdverts = await fetchAdvertsByPage(page);
-      setAdverts((prevCatalog) => [...prevCatalog, ...loadedAdverts]);
+      setAdverts(prevCatalog => [...prevCatalog, ...loadedAdverts]);
     } catch (error) {
-      toast.error("Oops! Something went wrong while loading adverts.");
+      toast.error('Oops! Something went wrong while loading adverts.');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const onLoadMore = () => {
     setPage(page + 1);
@@ -50,22 +49,22 @@ const Catalog = () => {
 
   useEffect(() => {
     getAllAdverts();
-  }, []);
+  }, [getAllAdverts]);
 
   useEffect(() => {
-    getAdvertsByPage();
-  }, [page]);
+    getAdvertsByPage(page);
+  }, [page, getAdvertsByPage]);
 
   useEffect(() => {
     if (isFiltered) {
-      const filteredAdverts = allAdverts.filter((advert) => {
+      const filteredAdverts = allAdverts.filter(advert => {
         const brandMatch =
           !filters.carBrand ||
           advert.make?.toLowerCase() === filters.carBrand.toLowerCase();
         const priceMatch =
           !filters.priceTo ||
           (advert.rentalPrice &&
-            parseInt(advert.rentalPrice.replace("$", "")) <= filters.priceTo);
+            parseInt(advert.rentalPrice.replace('$', '')) <= filters.priceTo);
         const mileageFromMatch =
           !filters.mileageFrom ||
           (advert.mileage && advert.mileage >= filters.mileageFrom);
@@ -79,14 +78,14 @@ const Catalog = () => {
 
       const message = filteredAdverts.length
         ? `${filteredAdverts.length} adverts found.`
-        : "No adverts found.";
+        : 'No adverts found.';
       toast.success(message);
     } else {
       setFilteredAdverts([]);
     }
-  }, [filters, isFiltered]);
+  }, [filters, isFiltered, allAdverts]);
 
-  const onSearch = (filters) => {
+  const onSearch = filters => {
     setIsFiltered(true);
     setFilters(filters);
   };

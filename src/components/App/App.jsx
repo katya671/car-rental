@@ -1,12 +1,12 @@
-import React, { lazy, useEffect } from "react";
-import SharedLayout from "../SharedLayout/SharedLayout";
-import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import React, { lazy } from 'react';
+import SharedLayout from '../SharedLayout/SharedLayout';
+import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
-const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
-const CatalogPage = lazy(() => import("../../pages/CatalogPage/CatalogPage"));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const CatalogPage = lazy(() => import('../../pages/CatalogPage/CatalogPage'));
 const FavoritesPage = lazy(() =>
-  import("../../pages/FavoritesPage/FavoritesPage")
+  import('../../pages/FavoritesPage/FavoritesPage')
 );
 
 const App = () => {
