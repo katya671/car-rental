@@ -37,11 +37,14 @@ const CarItem = ({ car }) => {
         <div className={css.imageWrap}>
           <img
             loading="lazy"
-            src={car.img}
+            src={car.img || "https://source.unsplash.com/s3mTM-faobU/800x600"}
             alt={car.make}
             width={274}
             height={268}
             className={css.image}
+            onError={(e) => {
+              e.target.src = "https://source.unsplash.com/s3mTM-faobU/800x600";
+            }}
           />
           <button
             className={`${css.heartBtn} ${isChecked ? css.checked : ""}`}
