@@ -62,6 +62,7 @@
 }
 
 .btnContainer {
+  display: block;
   max-width: 168px;
 }
 

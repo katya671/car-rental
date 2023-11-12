@@ -17,10 +17,6 @@ const Modal = ({ car, onClose }) => {
     };
   }, [onClose]);
 
-  const onRentalClick = () => {
-    window.location.href = "tel:+380730000000";
-  };
-
   return (
     <>
       <div className={css.backdrop} onClick={onClose}></div>
@@ -83,9 +79,9 @@ const Modal = ({ car, onClose }) => {
               Price: <span>{car.rentalPrice}</span>
             </li>
           </ul>
-          <div className={css.btnContainer}>
-            <Button onClick={onRentalClick}>Rental car</Button>
-          </div>
+          <a href="tel:+380730000000" className={css.btnContainer}>
+            <Button>Rental car</Button>
+          </a>
         </div>
       </div>
     </>

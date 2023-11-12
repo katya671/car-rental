@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import css from "./Filter.module.css";
 import Button from "../Button/Button";
-
 import makes from "../../data/makes.json";
-// import { setFilters } from "../../redux/advertsSlice";
-// import { useDispatch } from "react-redux";
 
 const options = [
   { value: "", label: "Any" },
@@ -118,12 +115,10 @@ const Filter = ({ onSearch }) => {
   const [priceTo, setPriceTo] = useState("");
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
-  // const dispatch = useDispatch();s
 
   const handleClick = (e) => {
     e.preventDefault();
     const filters = { carBrand, priceTo, mileageFrom, mileageTo };
-    // dispatch(setFilters(filters));
     onSearch(filters);
   };
 

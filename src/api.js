@@ -7,7 +7,6 @@ export const fetchAllAdverts = async () => {
     const response = await axios.get("/advert");
     return response.data;
   } catch (error) {
-    console.error("Error fetching all adverts:", error);
     throw error;
   }
 };
@@ -22,7 +21,6 @@ export const fetchAdvertsByPage = async (page) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching adverts by page:", error);
     throw error;
   }
 };

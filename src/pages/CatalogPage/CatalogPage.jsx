@@ -4,6 +4,8 @@ import CarList from "../../components/CarList/CarList";
 import css from "./CatalogPage.module.css";
 import Button from "../../components/Button/Button";
 import { fetchAllAdverts, fetchAdvertsByPage } from "../../api";
+import Loader from "../../components/Loader/Loader";
+import { toast } from "react-hot-toast";
 
 const Catalog = () => {
   const [page, setPage] = useState(1);
@@ -17,20 +19,28 @@ const Catalog = () => {
     mileageTo: "",
   });
   const [isFiltered, setIsFiltered] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const getAllAdverts = async () => {
     try {
-      const loadedAdverts = await fetchAdvertsByPage(page);
-      setAdverts((prevCatalog) => [...prevCatalog, ...loadedAdverts]);
-    } catch (error) {
-      console.error("Error fetching adverts by page:", error);
-    }
-
-    try {
+      setLoading(true);
       const allAdvertsData = await fetchAllAdverts();
       setAllAdverts(allAdvertsData);
     } catch (error) {
-      console.error("Error fetching all adverts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getAdvertsByPage = async () => {
+    try {
+      setLoading(true);
+      const loadedAdverts = await fetchAdvertsByPage(page);
+      setAdverts((prevCatalog) => [...prevCatalog, ...loadedAdverts]);
+    } catch (error) {
+      toast.error("Oops! Something went wrong while loading adverts.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,7 +49,11 @@ const Catalog = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getAllAdverts();
+  }, []);
+
+  useEffect(() => {
+    getAdvertsByPage();
   }, [page]);
 
   useEffect(() => {
@@ -62,6 +76,11 @@ const Catalog = () => {
         return brandMatch && priceMatch && mileageFromMatch && mileageToMatch;
       });
       setFilteredAdverts(filteredAdverts);
+
+      const message = filteredAdverts.length
+        ? `${filteredAdverts.length} adverts found.`
+        : "No adverts found.";
+      toast.success(message);
     } else {
       setFilteredAdverts([]);
     }
@@ -80,8 +99,11 @@ const Catalog = () => {
       ) : (
         <CarList data={adverts} />
       )}
+      {loading && <Loader />}
       {!isFiltered && adverts.length < allAdverts.length && (
-        <Button onClick={onLoadMore}>Load more</Button>
+        <button onClick={onLoadMore} className={css.loadMoreBtn}>
+          Load more
+        </button>
       )}
     </div>
   );
