@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Select from "react-select";
-import css from "./Filter.module.css";
-import Button from "../Button/Button";
-import makes from "../../data/makes.json";
+import React, { useState } from 'react';
+import Select from 'react-select';
+import css from './Filter.module.css';
+import Button from '../Button/Button';
+import makes from '../../data/makes.json';
 
 const options = [
-  { value: "", label: "Any" },
-  ...makes.map((make) => ({
+  { value: '', label: 'Any' },
+  ...makes.map(make => ({
     value: make.toLowerCase(),
     label: make,
   })),
@@ -20,79 +20,79 @@ for (let i = 30; i <= 500; i += 10) {
 const styles = {
   control: (baseStyles, state) => ({
     ...baseStyles,
-    display: "flex",
-    flexWrap: "nowrap",
-    minWidth: state.selectProps.id === "brand" ? "224px" : "125px",
-    height: "48px",
+    display: 'flex',
+    flexWrap: 'nowrap',
+    minWidth: state.selectProps.id === 'brand' ? '224px' : '125px',
+    height: '48px',
     padding:
-      state.selectProps.id === "brand" ? "14px 18px" : "14px 18px 14px 52px",
-    border: "none",
-    borderRadius: "14px",
-    backgroundColor: "var(--light)",
+      state.selectProps.id === 'brand' ? '14px 18px' : '14px 18px 14px 52px',
+    border: 'none',
+    borderRadius: '14px',
+    backgroundColor: 'var(--light)',
 
-    "&::before": {
-      content: state.selectProps.id === "price" ? "'To $'" : "''",
-      position: "absolute",
-      left: "18px",
-      fontSize: "18px",
-      fontWeight: "500",
-      lineHeight: "1.11",
+    '&::before': {
+      content: state.selectProps.id === 'price' ? "'To $'" : "''",
+      position: 'absolute',
+      left: '18px',
+      fontSize: '18px',
+      fontWeight: '500',
+      lineHeight: '1.11',
     },
   }),
-  indicatorSeparator: () => ({ display: "none" }),
+  indicatorSeparator: () => ({ display: 'none' }),
   dropdownIndicator: (baseStyles, state) => ({
     ...baseStyles,
-    padding: "0",
-    color: "var(--dark)",
-    transition: "transform var(--tra)",
-    transform: state.isFocused ? "rotate(180deg)" : "rotate(0)",
+    padding: '0',
+    color: 'var(--dark)',
+    transition: 'transform var(--tra)',
+    transform: state.isFocused ? 'rotate(180deg)' : 'rotate(0)',
   }),
-  valueContainer: (baseStyles) => ({
+  valueContainer: baseStyles => ({
     ...baseStyles,
-    color: "var(--dark)",
-    fontSize: "18px",
-    fontWeight: "500",
-    lineHeight: "1.11",
-    padding: "0",
+    color: 'var(--dark)',
+    fontSize: '18px',
+    fontWeight: '500',
+    lineHeight: '1.11',
+    padding: '0',
   }),
-  placeholder: (baseStyles) => ({
+  placeholder: baseStyles => ({
     ...baseStyles,
-    color: "var(--dark)",
+    color: 'var(--dark)',
   }),
-  menu: (baseStyles) => ({
+  menu: baseStyles => ({
     ...baseStyles,
-    marginTop: "4px",
-    padding: "14px 8px 14px 18px",
-    borderRadius: "14px",
-    border: "1px solid rgba(18, 20, 23, 0.05)",
-    background: "var(--white)",
-    boxShadow: "0px 4px 36px 0px rgba(0, 0, 0, 0.02)",
+    marginTop: '4px',
+    padding: '14px 8px 14px 18px',
+    borderRadius: '14px',
+    border: '1px solid rgba(18, 20, 23, 0.05)',
+    background: 'var(--white)',
+    boxShadow: '0px 4px 36px 0px rgba(0, 0, 0, 0.02)',
   }),
   menuList: (_, state) => ({
-    maxHeight: state.selectProps.id === "carBrand" ? "272px" : "188px",
-    overflowY: "auto",
+    maxHeight: state.selectProps.id === 'carBrand' ? '272px' : '188px',
+    overflowY: 'auto',
   }),
   option: () => ({
-    color: "rgba(18, 20, 23, 0.20)",
-    fontWeight: "500",
-    fontSize: "16px",
-    lineHeight: "1.25",
-    cursor: "pointer",
-    marginBottom: "8px",
-    transition: "color var(--tra)",
-    "&:hover": {
-      color: "var(--dark)",
+    color: 'rgba(18, 20, 23, 0.20)',
+    fontWeight: '500',
+    fontSize: '16px',
+    lineHeight: '1.25',
+    cursor: 'pointer',
+    marginBottom: '8px',
+    transition: 'color var(--tra)',
+    '&:hover': {
+      color: 'var(--dark)',
     },
   }),
 };
 
 const Filter = ({ onSearch }) => {
-  const [carBrand, setCarBrand] = useState("");
-  const [priceTo, setPriceTo] = useState("");
-  const [mileageFrom, setMileageFrom] = useState("");
-  const [mileageTo, setMileageTo] = useState("");
+  const [carBrand, setCarBrand] = useState('');
+  const [priceTo, setPriceTo] = useState('');
+  const [mileageFrom, setMileageFrom] = useState('');
+  const [mileageTo, setMileageTo] = useState('');
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault();
     const filters = { carBrand, priceTo, mileageFrom, mileageTo };
     onSearch(filters);
@@ -109,7 +109,7 @@ const Filter = ({ onSearch }) => {
           name="brand"
           options={options}
           styles={styles}
-          onChange={(selectedOption) => setCarBrand(selectedOption.value)}
+          onChange={selectedOption => setCarBrand(selectedOption.value)}
         />
       </div>
 
@@ -122,7 +122,7 @@ const Filter = ({ onSearch }) => {
           name="price"
           options={priceOptions}
           styles={styles}
-          onChange={(selectedOption) => setPriceTo(selectedOption.value)}
+          onChange={selectedOption => setPriceTo(selectedOption.value)}
         />
       </div>
 
@@ -134,7 +134,7 @@ const Filter = ({ onSearch }) => {
               type="number"
               className={css.input}
               value={mileageFrom}
-              onChange={(e) => setMileageFrom(e.target.value)}
+              onChange={e => setMileageFrom(e.target.value)}
             />
           </div>
           <div className={css.inputWrap}>
@@ -142,13 +142,13 @@ const Filter = ({ onSearch }) => {
               type="number"
               className={css.input}
               value={mileageTo}
-              onChange={(e) => setMileageTo(e.target.value)}
+              onChange={e => setMileageTo(e.target.value)}
             />
           </div>
         </div>
       </div>
       <div className={css.btnContainer}>
-        <Button type="submit" padding={"14px"} onClick={handleClick}>
+        <Button type="submit" padding={'14px'} onClick={handleClick}>
           Search
         </Button>
       </div>

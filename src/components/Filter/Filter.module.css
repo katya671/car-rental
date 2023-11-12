@@ -44,7 +44,7 @@ label {
     }
 
     &:before {
-      content: "From";
+      content: 'From';
       position: absolute;
       top: 14px;
       left: 24px;
@@ -61,7 +61,7 @@ label {
     }
 
     &:before {
-      content: "To";
+      content: 'To';
       position: absolute;
       top: 14px;
       left: 24px;

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import css from "./CarItem.module.css";
-import Button from "./../Button/Button";
-import Modal from "./../Modal/Modal";
-import sprite from "../../images/sprite.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite } from "../../redux/favoritesSlice";
-import { selectFavorites } from "../../redux/selectors";
+import React, { useState } from 'react';
+import css from './CarItem.module.css';
+import Button from './../Button/Button';
+import Modal from './../Modal/Modal';
+import sprite from '../../images/sprite.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from '../../redux/favoritesSlice';
+import { selectFavorites } from '../../redux/selectors';
 
 const CarItem = ({ car }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -37,21 +37,21 @@ const CarItem = ({ car }) => {
         <div className={css.imageWrap}>
           <img
             loading="lazy"
-            src={car.img || "https://source.unsplash.com/s3mTM-faobU/800x600"}
+            src={car.img || 'https://source.unsplash.com/s3mTM-faobU/800x600'}
             alt={car.make}
             width={274}
             height={268}
             className={css.image}
-            onError={(e) => {
-              e.target.src = "https://source.unsplash.com/s3mTM-faobU/800x600";
+            onError={e => {
+              e.target.src = 'https://source.unsplash.com/s3mTM-faobU/800x600';
             }}
           />
           <button
-            className={`${css.heartBtn} ${isChecked ? css.checked : ""}`}
+            className={`${css.heartBtn} ${isChecked ? css.checked : ''}`}
             onClick={handleHeartClick}
           >
             <svg width="18" height="18" className={css.icon}>
-              <use href={sprite + "#icon-heart-white"}></use>
+              <use href={sprite + '#icon-heart-white'}></use>
             </svg>
           </button>
         </div>
@@ -62,8 +62,8 @@ const CarItem = ({ car }) => {
           <p>{car.rentalPrice}</p>
         </div>
         <ul className={css.info}>
-          <li>{car.address.split(", ")[1]}</li>
-          <li>{car.address.split(", ")[2]}</li>
+          <li>{car.address.split(', ')[1]}</li>
+          <li>{car.address.split(', ')[2]}</li>
           <li>{car.rentalCompany}</li>
           <li className={css.break}></li>
           <li>{car.type}</li>

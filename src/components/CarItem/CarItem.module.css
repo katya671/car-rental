@@ -73,13 +73,13 @@
   overflow: hidden;
 
   *:not(:last-child)::after {
-    content: "|";
+    content: '|';
     margin-left: 6px;
     margin-right: 6px;
   }
 
   *:nth-child(3)::after {
-    content: "";
+    content: '';
     margin-left: 0;
     margin-right: 0;
   }
@@ -90,7 +90,7 @@
   }
 
   .break:after {
-    content: "";
+    content: '';
     margin-left: 0;
   }
 }

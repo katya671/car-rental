@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favorites: [],
 };
 
 export const favoritesSlice = createSlice({
-  name: "favorites",
+  name: 'favorites',
   initialState,
   reducers: {
     addFavorite: (state, action) => {
@@ -13,7 +13,7 @@ export const favoritesSlice = createSlice({
     },
     removeFavorite: (state, action) => {
       const updatedFavorites = state.favorites.filter(
-        (item) => item.id !== action.payload.id
+        item => item.id !== action.payload.id
       );
       state.favorites = updatedFavorites;
     },

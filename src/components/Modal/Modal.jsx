@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import css from "./Modal.module.css";
-import Button from "../Button/Button";
-import sprite from "../../images/sprite.svg";
+import React, { useEffect } from 'react';
+import css from './Modal.module.css';
+import Button from '../Button/Button';
+import sprite from '../../images/sprite.svg';
 
 const Modal = ({ car, onClose }) => {
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.code === "Escape") {
+    const handleKeyDown = e => {
+      if (e.code === 'Escape') {
         onClose();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
 
@@ -24,26 +24,26 @@ const Modal = ({ car, onClose }) => {
         <div className={css.content}>
           <button type="button" className={css.closeBtn} onClick={onClose}>
             <svg width="24" height="24" className={css.closeIcon}>
-              <use href={sprite + "#icon-x"}></use>
+              <use href={sprite + '#icon-x'}></use>
             </svg>
           </button>
           <img
             loading="lazy"
-            src={car.img || "https://source.unsplash.com/s3mTM-faobU/800x600"}
+            src={car.img || 'https://source.unsplash.com/s3mTM-faobU/800x600'}
             alt={car.make}
             width={461}
             height={248}
             className={css.image}
-            onError={(e) => {
-              e.target.src = "https://source.unsplash.com/s3mTM-faobU/800x600";
+            onError={e => {
+              e.target.src = 'https://source.unsplash.com/s3mTM-faobU/800x600';
             }}
           />
           <h2 className={css.title}>
             {car.make} <span>{car.model}</span>, {car.year}
           </h2>
           <ul className={`${css.list} ${css.info}`}>
-            <li>{car.address.split(",")[1]}</li>
-            <li>{car.address.split(",")[2]}</li>
+            <li>{car.address.split(',')[1]}</li>
+            <li>{car.address.split(',')[2]}</li>
             <li>Id: {car.id}</li>
             <li>Year: {car.year}</li>
             <li>Type: {car.type}</li>
@@ -65,18 +65,18 @@ const Modal = ({ car, onClose }) => {
           <h3 className={css.subtitle}>Rental Conditions:</h3>
           <ul className={css.conditions}>
             <li className={css.condition}>
-              Minimum age:{" "}
-              <span>{car.rentalConditions.split("\n")[0].split(": ")[1]}</span>
+              Minimum age:{' '}
+              <span>{car.rentalConditions.split('\n')[0].split(': ')[1]}</span>
             </li>
             <li className={css.condition}>
-              {car.rentalConditions.split("\n")[1]}
+              {car.rentalConditions.split('\n')[1]}
             </li>
             <li className={css.condition}>
-              {car.rentalConditions.split("\n")[2]}
+              {car.rentalConditions.split('\n')[2]}
             </li>
             <li className={css.condition}>
-              Mileage:{" "}
-              <span>{Number(car.mileage).toLocaleString("en-US")}</span>
+              Mileage:{' '}
+              <span>{Number(car.mileage).toLocaleString('en-US')}</span>
             </li>
             <li className={css.condition}>
               Price: <span>{car.rentalPrice}</span>
