@@ -49,7 +49,7 @@ vehicles for their travel needs.
 ## Technical Specifications
 
 - Built with React.
-- State management using React Hooks.
+- State management using React Hooks and Redux.
 - React Router for navigation.
 - MockAPI for backend.
 - Responsive design for a seamless experience on different devices.
