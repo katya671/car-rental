@@ -11,7 +11,7 @@ vehicles for their travel needs.
 - Simple and welcoming design.
 - Button: "To Catalog" navigates users to the catalog page.
 
-![Home Page](./assets/home.png)
+![Home Page](./assets/homepage.png)
 
 ### Catalog Page:
 
